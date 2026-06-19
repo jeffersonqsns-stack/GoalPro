@@ -67,11 +67,37 @@ Final report:
 Research required:
 这是战略型 Skill 设计任务，依赖当前 Codex / Claude Code / Agent Skills / deep research 最佳实践。没有 deep research 只能给草案，不能给最终战略。
 
+Research question:
+判断 goal Skill 应该如何同时满足 Codex / Claude Code 触发、战略意图放大、deep research、输出位置和验证要求。
+
+Subquestions:
+1. 官方文档如何定义 goal / skill 的触发与完成标准？
+2. 高质量 GitHub 项目如何组织 skill、references、examples？
+3. Reddit / issue 中真实用户在哪些场景里跑偏？
+4. X / 社区实践有哪些短循环信号，需要哪些交叉验证？
+5. 哪些证据会推翻“默认聊天输出、显式才写文件”的路线？
+
 Evidence Map 摘要:
-- Codex goal 文档：goal 要写成完成契约，包含结果、约束和可验证 done-when。
-- Claude / Agent Skills 文档：description 是触发表面，必须描述使用场景，不能塞次要优化目标。
-- Deep Research / PRISMA / GRADE：战略判断要有来源范围、反证、信心等级和决策影响。
-- GitHub / Reddit / X 社区信号：把 plan、inventory、diff、verify 做成短循环；社区信号只作候选，必须交叉验证。
+- Source type: official
+  Claim: Codex goal 要写成完成契约，包含结果、约束和可验证 done-when。
+  Decision impact: 写入 `Decision standard` 和 `Verification`。
+- Source type: official
+  Claim: Claude / Agent Skills 的 `description` 是触发表面，必须描述使用场景，不能塞次要优化目标。
+  Decision impact: 禁止把表达压缩写进 `description`。
+- Source type: method
+  Claim: Deep Research / PRISMA / GRADE 要说明来源范围、反证、信心等级和决策影响。
+  Decision impact: 增加 `Evidence standard` 和 `Stop conditions`。
+- Source type: github / reddit / x
+  Claim: 社区高频实践是 plan、inventory、diff、verify 短循环；社区信号只能作候选，必须交叉验证。
+  Decision impact: 增加 inventory、社区信号权重和反模式。
+
+Counterevidence:
+- 社区帖子可能只适用于作者自己的工具链。
+- 过度流程会让小任务变慢。
+- 如果用户只是要一个提示词，写文件会降低用户体验。
+
+Confidence:
+medium-high。官方文档和本地项目证据支持核心规则；社区信号只作为失败模式和实践趋势，不单独决定标准。
 
 Research-backed Goal Contract:
 Goal:
@@ -88,6 +114,9 @@ Decision standard:
 
 Evidence standard:
 战略任务必须先 fetch 权威来源和反证；普通项目任务必须先读会改变路线的本地材料；最终报告必须区分未验证、结构检查、本地验证、线上验证和人工验收。
+
+Stop conditions:
+来源互相冲突且影响核心规则；关键证据缺失；研究没有改变 Goal Contract 字段。
 ```
 
 ## 大改或重构请求
