@@ -10,6 +10,7 @@
 - 战略任务必须先证据后定论：没有 deep research 的战略只能标为草案。
 - 复杂研究用 orchestrator-workers 思路拆源、拆观点、拆反证；有清晰评价标准时用 evaluator-optimizer 思路反复修正。
 - 评测要拆开：意图识别、证据质量、路线判断、工具选择、执行遵守、最终状态不能混在一起。
+- 开源与社区资料只作为实践信号：GitHub 优先于 X / Reddit；重复出现且能解释真实失败的信号才吸收。
 - Meta_Kim：Critical -> Fetch -> Thinking -> Execution -> Review -> Verification；先取证再定路线；结构检查不能冒充用户目标完成。
 
 ## Deep Research 规则
@@ -27,6 +28,31 @@
 
 不能因为资料多就升级为“最终战略”。如果缺少关键证据，输出 `Research Plan` 或 `Draft Goal`。
 
+## GitHub / X / Reddit 吸收规则
+
+三类来源的权重不同：
+
+- `GitHub repo / discussion`：可观察到文件结构、实践约定、issue 讨论和维护方式，适合抽象成规则。
+- `Reddit thread`：适合发现真实用户困惑、失败模式和反例，不适合单独作为权威。
+- `X post / article`：适合捕捉新实践和短工作流口号，必须用 GitHub、官方文档或本地验证交叉确认。
+
+可吸收的社区信号：
+
+1. `Context layering`：常驻文件只放核心规则，细节放 references/docs，按需读取，防止上下文污染。
+2. `Inventory before mutation`：大改、重构、复杂代码任务先列影响文件、调用方、测试和验证入口。
+3. `Plan as artifact`：复杂计划应写成可编辑、可恢复的 Markdown，而不是只留在对话历史。
+4. `Small step verification`：每个阶段都要有最小相关检查，最后再做完整验证。
+5. `Skill / command / agent boundary`：Skill 放可复用流程；agent 放独立上下文和工具权限；command 放显式触发动作。
+6. `Reload awareness`：运行中的会话可能缓存 skill / agent 定义；修改定义后不能只靠同一会话自测证明新定义生效。
+
+拒绝吸收的社区信号：
+
+- 只是一句流行口号，无法改变成败标准。
+- 只对某个作者的私有工具链成立。
+- 要求所有任务走重流程，导致小任务过度规划。
+- 鼓励把所有东西塞进 `CLAUDE.md` / `AGENTS.md`。
+- 用更多 agent、hook、MCP 掩盖意图不清。
+
 ## 质量原则
 
 1. 意图放大优先：不能只复述用户原话，要说清真实意图和战略结果。
@@ -37,6 +63,7 @@
 6. 上下文读取只列会改变路线或验收的材料。
 7. 验证必须区分：未验证、结构检查、本地验证、线上验证、人工验收。
 8. 不因“看起来完整”增加机制；只为防真实失败加规则。
+9. 社区经验要过来源权重和反证筛选，不能把热闹观点写成标准。
 
 ## 来源地图
 
@@ -57,6 +84,21 @@
 - Anthropic agent evaluation: https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents
 - PRISMA 2020: https://www.prisma-statement.org/prisma-2020
 - GRADE approach: https://www.gradeworkinggroup.org/
+- AGENTS.md format: https://github.com/agentsmd/agents.md
+- Addy Osmani agent-skills: https://github.com/addyosmani/agent-skills
+- mgechev skills-best-practices: https://github.com/mgechev/skills-best-practices
+- ykdojo Claude Code tips: https://github.com/ykdojo/claude-code-tips
+- ching-kuo claude-codex workflow: https://github.com/ching-kuo/claude-codex
+- shinpr codex-workflows: https://github.com/shinpr/codex-workflows
+- OpenAI Codex plan/spec discussion: https://github.com/openai/codex/discussions/7355
+- Reddit AGENTS.md practice thread: https://www.reddit.com/r/ChatGPTCoding/comments/1nwe5nz/my_agentsmd/
+- Reddit large-codebase agent workflow thread: https://www.reddit.com/r/ClaudeCode/comments/1rwojpn/best_approach_to_use_ai_agents_claude_code_codex/
+- Reddit Claude.md / skills / agents structure thread: https://www.reddit.com/r/ClaudeCode/comments/1qub3fm/best_practices_project_structure_ie_interplay/
+- Reddit goal-driven CLAUDE.md thread: https://www.reddit.com/r/ClaudeAI/comments/1t89g1j/best_claudemd_files_for_claude_code/
+- X workflow signal, scoped workflows: https://x.com/trq212/status/2061907538741006796
+- X plan artifact signal: https://x.com/derrickcchoi/status/2031023512534634758
+- X smallest verification signal: https://x.com/PaulSolt/article/2040132557983936772
+- X plan-validate-execute signal: https://x.com/nurijanian/article/2060672098050490380
 
 ## 来源抽象
 
@@ -65,6 +107,9 @@
 - OpenAI Deep Research：适合陌生、高风险、证据密集的任务；输出应带引用、来源元数据和中间检索过程。
 - Anthropic agents：复杂研究可拆成多个子问题；有明确评价标准时，应让评估反过来改进结果。
 - PRISMA / GRADE：高质量研究要说明为什么做、怎么找、证据有多可靠，以及证据如何支持建议强度。
+- GitHub 社区项目：高质量 Skill 倾向于单一职责、可验证退出条件、短正文和按需 references；复杂工作流常见 plan -> implement -> review 或 plan -> diff -> verify。
+- Reddit 真实反馈：用户最常遇到的是上下文污染、计划文件缺失、过度使用 agent/hook/MCP、先改后盘点、验证不连续。
+- X 实践信号：新工作流常把计划、diff、验证、最小测试和隔离上下文当作短循环，但这些只能作为候选模式，必须交叉验证。
 - Meta_Kim：Critical/Fetch/Thinking/Review 是路线约束；没有 Fetch 的战略判断不能假装完成。
 
 ## 反模式
@@ -74,6 +119,10 @@
 - 把表达成本写进 `description`，污染触发判断。
 - 把缩短提示词当核心目标，牺牲意图放大和战略完成度。
 - 列任务很多，却没有最终状态。
+- 把 Reddit/X 单帖当权威结论。
+- 先重构再补 inventory。
+- 把计划只留在聊天历史，导致恢复和验收不可见。
+- 不区分 Skill、command、agent，把所有能力混成一个大提示词。
 - 用户给了文件/错误/截图，却先问一堆问题。
 - 小任务要求全仓库阅读。
 - 测试通过就说完成，但用户要的行为没有证据。

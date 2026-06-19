@@ -71,6 +71,7 @@ Evidence Map 摘要:
 - Codex goal 文档：goal 要写成完成契约，包含结果、约束和可验证 done-when。
 - Claude / Agent Skills 文档：description 是触发表面，必须描述使用场景，不能塞次要优化目标。
 - Deep Research / PRISMA / GRADE：战略判断要有来源范围、反证、信心等级和决策影响。
+- GitHub / Reddit / X 社区信号：把 plan、inventory、diff、verify 做成短循环；社区信号只作候选，必须交叉验证。
 
 Research-backed Goal Contract:
 Goal:
@@ -87,6 +88,51 @@ Decision standard:
 
 Evidence standard:
 战略任务必须先 fetch 权威来源和反证；普通项目任务必须先读会改变路线的本地材料；最终报告必须区分未验证、结构检查、本地验证、线上验证和人工验收。
+```
+
+## 大改或重构请求
+
+输入：
+
+```text
+把订单模块重构一下，现在太乱了
+```
+
+输出必须先阻止“直接重构”：
+
+```markdown
+Goal:
+重构订单模块中影响维护性的核心路径，并保持现有业务行为不变。
+
+Intent:
+用户真正要的是降低订单模块后续修改成本，不是追求大面积改写。
+
+Strategic outcome:
+订单模块的职责边界、调用关系和验证入口变清楚，后续改需求能更快定位影响面。
+
+Decision standard:
+行为兼容 > 可验证切片 > 结构清晰 > 改动范围。禁止无 inventory 的大面积移动文件。
+
+Evidence standard:
+先列 inventory：订单相关入口、调用方、数据库/接口边界、现有测试、手动验证路径。每个重构切片必须绑定一个最小验证。
+
+Context to read first:
+- 订单模块入口
+- 调用订单模块的 API / service / UI
+- 订单相关测试
+- 构建和测试命令
+
+Execution policy:
+先输出 inventory 和分片计划；用户或当前任务允许后，再按最小切片改。每片后运行对应测试或说明无法验证。
+
+Checkpoints:
+1. Inventory：影响文件、调用方、测试入口。
+2. Slice 1：无行为变化的命名/抽取，验证相关测试。
+3. Slice 2：职责拆分或边界整理，验证订单主流程。
+4. Final review：diff、行为风险、未覆盖路径。
+
+Stop conditions:
+找不到订单行为验收路径；需要改数据库语义；发现多个互斥架构路线；测试无法运行且无手动验证办法。
 ```
 
 ## 修复跑偏请求
@@ -150,6 +196,8 @@ Pause if:
 使用 goal Skill，把下面请求整理成可执行任务；目标清楚后再实现。
 
 先读 `CLAUDE.md` 和用户点名文件。若请求依赖外部事实、战略判断或高质量研究，先做 deep research 并给证据地图；若存在会改变范围、风险或验收的多条路线，先通过原生提问界面问我。
+
+若请求涉及大改、重构或跨模块行为，先输出 inventory 和分片验证计划，不要直接修改代码。
 
 请求：
 [用户请求]

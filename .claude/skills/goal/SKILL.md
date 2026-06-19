@@ -33,6 +33,7 @@ Fetch 后输出或内化 `Evidence Map`：
 ```markdown
 Evidence Map:
 - Source:
+  Source type:
   Claim:
   Relevance:
   Confidence:
@@ -47,9 +48,12 @@ Evidence Map:
 1. Critical：先指出用户真正不满、要推进的局面、最大误伤点。
 2. Fetch：只读取会改变战略、边界、验收或执行路线的材料；战略任务先做 deep research。
 3. Thinking：比较路线，写清取舍；把反例、未知和信心等级放进判断。
-4. Contract：写 Goal Contract，让执行者知道做什么、不做什么、先读什么、何时停。
-5. Review：用成败标准反查合同，删掉装饰性流程，保留关键判断。
-6. Expression economy：最后才压缩表达；不得牺牲意图完成度。
+4. Inventory：涉及代码库、文档库或复杂系统时，先列会受影响的文件、调用方、测试和验证入口，再允许执行。
+5. Contract：写 Goal Contract，让执行者知道做什么、不做什么、先读什么、何时停。
+6. Review：用成败标准反查合同，删掉装饰性流程，保留关键判断。
+7. Expression economy：最后才压缩表达；不得牺牲意图完成度。
+
+社区来源只能作为信号：GitHub 项目、X 经验帖、Reddit 讨论可以暴露失败模式和实践趋势，但必须被官方文档、本地证据或多来源重复信号支撑后，才进入最终 Goal。
 
 ## 战略标准
 
@@ -62,6 +66,7 @@ Evidence Map:
 - `关键边界`：范围、权限、风险、语言、质量要求和不做事项。
 - `取舍逻辑`：速度、范围、质量、表达成本冲突时保什么、舍什么。
 - `反证与未知`：哪些证据会推翻当前路线，哪些问题必须暂停。
+- `上下文策略`：哪些内容常驻，哪些按需读取，哪些写入可恢复的计划文件。
 
 ## 字段标准
 
@@ -107,6 +112,7 @@ Final report:
 - 战略/研究 goal：输出 `Research-backed Goal Contract`、`Evidence Map 摘要`、`反证/未知`。
 - Codex 执行场景：给 `/goal` block，包含 done-when、read-first、checkpoints、pause-if。
 - Claude Code 执行场景：给任务提示词，包含先读材料、执行策略、验证和暂停条件。
+- 大改/重构场景：先输出 inventory、影响面、分片计划、每片验证；不得先重构再补解释。
 - Repair 场景：先指出旧目标哪里错，再给修正版和防跑偏检查。
 
 ## 验收清单
@@ -114,6 +120,8 @@ Final report:
 - 意图：说的是用户真正要的结果，不只是表面动作。
 - 战略：说明结果价值、成败标准、证据标准和关键取舍。
 - Deep Research：战略或外部事实任务有来源、反证、信心等级和决策影响。
+- Community Signal：GitHub / X / Reddit 只当候选证据，已说明来源类型和采纳理由。
+- Inventory：复杂代码任务先有影响面地图，再进入实现。
 - 边界：保留用户限制，明确不做什么。
 - 标准：每个关键字段能判断合格/不合格。
 - 工具：只要求读取会改变判断的上下文。

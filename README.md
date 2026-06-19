@@ -11,6 +11,8 @@ GoalPro 是一个给 Codex 和 Claude Code 共用的 `goal` Skill 项目。
 - 先放大真实意图，不只复述用户原话。
 - 战略型任务必须先 deep research；没有证据只能给草案，不能给最终战略。
 - 先讲清成败标准、关键边界、证据标准、反证和取舍逻辑。
+- 复杂代码任务先做影响面 inventory，再分片执行和验证。
+- GitHub、X、Reddit 的经验只作社区信号，必须交叉验证后吸收。
 - 表达压缩只能删除空话，不能删除关键判断。
 - 不用流程包装弥补战略意图不清。
 
@@ -40,6 +42,7 @@ CLAUDE.md                         Claude Code 项目说明
 - 把模糊需求变成可执行任务
 - 明确意图、范围、验收标准
 - 做 deep research 后制定战略或执行目标
+- 给大改、重构、跨模块任务制定 inventory 和分片验证计划
 - 给 Codex 准备 `/goal`
 - 给 Claude Code 准备执行提示词
 - 修复之前智能体输出跑偏、太复杂、假完成的问题
@@ -75,8 +78,8 @@ Final report:
 - `Scope`：列本次做什么；避免把未来计划塞进来。
 - `Non-goals`：明确不做什么；用来防止过度发挥。
 - `Context to read first`：只写会改变执行判断的文件、日志、截图、文档。
+- `Execution policy`：大改先 inventory，小改直接做；高风险先问。
 - `Constraints`：写硬限制，例如不删除、不发布、不改接口、不泄露密钥。
-- `Execution policy`：写什么时候直接做、什么时候必须问。
 - `Verification`：写证据类型，例如测试、diff、截图、线上状态、人工验收。
 - `Stop conditions`：写必须暂停的风险点。
 
@@ -99,6 +102,7 @@ Final report:
 - 如果改了 Codex 版本，也要同步 Claude Code 版本。
 - `description` 是触发表面，只写使用场景和能力，不写表达成本这种次级目标。
 - 战略任务必须先 deep research，证据不足时只能输出草案或研究计划。
+- GitHub / X / Reddit 可以补充真实失败模式，但不能替代官方文档、本地证据和验证。
 - 表达经济从属于意图完成度，不允许本末倒置。
 - 不要因为“看起来完整”就增加复杂机制；只有能防止真实失败时才加规则。
 - 最终完成不能只看命令是否跑通，还要看用户目标是否真的达成。
